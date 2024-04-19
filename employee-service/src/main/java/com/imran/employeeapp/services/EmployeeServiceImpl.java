@@ -23,6 +23,11 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .map(employee -> modelMapper.map(employee, EmployeeDTO.class))
                 .collect(Collectors.toList());
     }
+    @Override
+    public EmployeeDTO getEmployeeById(int id) {
+        Employee employee = repo.findById(id).get();
+        return modelMapper.map(employee, EmployeeDTO.class);
+    }
 
     @Override
     public List<EmployeeDTO> getAllEmployeesByBloodGroup(String bloodGroup) {
@@ -37,5 +42,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee = repo.save(employee);
         return modelMapper.map(employee, EmployeeDTO.class);
     }
+
+
 
 }

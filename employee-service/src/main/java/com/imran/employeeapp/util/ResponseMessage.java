@@ -3,26 +3,29 @@ package com.imran.employeeapp.util;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-public class ResponseMessage<T> {
-    private String message;
-    private T data;
-    public ResponseMessage(String message, T data){
-        this.message= message;
-        this.data=data;
-    }
-    public static <T> ResponseEntity<ResponseMessage<T>> success(String message, T data) {
-        return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage<>(message, data));
+import java.util.HashMap;
+import java.util.Map;
+
+public class ResponseMessage {
+
+    public static <T> ResponseEntity<T> createResponse(HttpStatus status, T body, String message) {
+        Map<String, Object> responseBody = new HashMap<>();
+        responseBody.put("status", status.value());
+        responseBody.put("message", message);
+        responseBody.put("data", body);
+        return ResponseEntity.status(status).body((T) responseBody);
     }
 
-    public static <T> ResponseEntity<ResponseMessage<T>> error(String message, HttpStatus status) {
-        return ResponseEntity.status(status).body(new ResponseMessage<>(message, null));
+    public static <T> ResponseEntity<T> createResponse(HttpStatus status, T body) {
+        Map<String, Object> responseBody = new HashMap<>();
+        responseBody.put("status", status.value());
+        responseBody.put("data", body);
+        return ResponseEntity.status(status).body((T)responseBody);
     }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public T getData() {
-        return data;
+    public static <T> ResponseEntity<T> createResponse(HttpStatus status, String message) {
+        Map<String, Object> responseBody = new HashMap<>();
+        responseBody.put("status", status.value());
+        responseBody.put("message", message);
+        return ResponseEntity.status(status).body((T)responseBody);
     }
 }

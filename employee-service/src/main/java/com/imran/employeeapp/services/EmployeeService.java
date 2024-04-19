@@ -10,4 +10,5 @@ public interface EmployeeService {
     public List<EmployeeDTO> getAllEmployees();
     public List<EmployeeDTO> getAllEmployeesByBloodGroup(String bloodGroup);
     public EmployeeDTO storeEmployee(EmployeeDTO employeeDTO);
+    public EmployeeDTO getEmployeeById(int id);
 }
