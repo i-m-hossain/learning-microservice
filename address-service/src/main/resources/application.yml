@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: address-service
+  # Database connection properties
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/address-service?createDatabaseIfNotExist=true
+    username: root
+    password: password
+    driver-class:
+      name: com.mysql.cj.jdbc.Driver
+  # JPA configuration
+  jpa:
+    hibernate:
+      ddl: auto=update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+server:
+  port: 15002

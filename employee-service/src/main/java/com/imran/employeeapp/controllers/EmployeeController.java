@@ -14,28 +14,29 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/employees")
 public class EmployeeController {
     private final EmployeeService employeeService;
     EmployeeController(EmployeeService employeeService){
         this.employeeService = employeeService;
     }
-    @GetMapping("/employees")
+    @GetMapping("/")
     public ResponseEntity<List<EmployeeDTO>> getAllEmployees(){
         List<EmployeeDTO> employees=  employeeService.getAllEmployees();
         return ResponseMessage.createResponse(HttpStatus.OK, employees);
     }
-    @GetMapping("/employees/bloodGroup/{bloodGroup}")
+    @GetMapping("/bloodGroup/{bloodGroup}")
     public ResponseEntity<List<EmployeeDTO>> getEmployeesByBloodGroup(@PathVariable String bloodGroup){
         List<EmployeeDTO> employees =  employeeService.getAllEmployeesByBloodGroup(bloodGroup);
         return ResponseMessage.createResponse(HttpStatus.OK, employees);
     }
-    @GetMapping("/employees/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable int id)
     {
         EmployeeDTO employee = employeeService.getEmployeeById(id);
         return ResponseMessage.createResponse(HttpStatus.OK, employee);
     }
-    @PostMapping("/employees")
+    @PostMapping("/")
     @Validated
     public ResponseEntity<EmployeeDTO> createEmployee(@Valid @RequestBody EmployeeDTO employeeDTO)
     {
