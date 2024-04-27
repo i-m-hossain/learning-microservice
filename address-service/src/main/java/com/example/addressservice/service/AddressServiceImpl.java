@@ -27,8 +27,8 @@ public class AddressServiceImpl implements AddressService{
     }
 
     @Override
-    public AddressDto getAddress(int employeeId) {
-        Address address = repo.findById(employeeId).get();
+    public AddressDto getAddressByEmployeeId(int employeeId) {
+        Address address = repo.findAddressesByEmployeeId(employeeId);
         return modelMapper.map(address, AddressDto.class);
     }
 

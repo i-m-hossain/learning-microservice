@@ -12,7 +12,6 @@ public class Address {
     private String lane2;
     private String state;
     private String zip;
-
     @Column(name="employee_id")
     private int employeeId;
 
@@ -56,11 +55,11 @@ public class Address {
         this.zip = zip;
     }
 
-    public int getEmployee_id() {
+    public int getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployee_id(int employeeId) {
+    public void setEmployeeId(int employeeId) {
         this.employeeId = employeeId;
     }
 }
