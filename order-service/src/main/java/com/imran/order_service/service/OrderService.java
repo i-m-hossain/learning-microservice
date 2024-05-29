@@ -16,6 +16,7 @@ public class OrderService {
     private ProductClient productClient;
 
     public List<Order> getAllOrders() {
+       
         return orderRepository.findAll();
     }
 
