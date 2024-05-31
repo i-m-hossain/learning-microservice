@@ -11,20 +11,6 @@ spring:
         locator:
           enabled: true
           lower-case-service-id: true
-      routes:
-        - id: product-service
-          predicates:
-            - Path=/products/
-          uri: localhost:8081
-        - id: order-service
-          predicates:
-            - Path=/orders/
-          uri: localhost:8082
-        - id: inventory-service
-          predicates:
-            - Path=/inventory/
-          uri: localhost:8083
-
 
 eureka:
   client:
@@ -32,3 +18,9 @@ eureka:
       default-zone: http://localhost:8761/eureka/
     register-with-eureka: true
     fetch-registry: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include=*:
