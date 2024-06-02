@@ -11,6 +11,7 @@
         <module name="inventory-service" />
         <module name="order-service" />
         <module name="eureka-server" />
+        <module name="auth-server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -24,6 +25,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="address-service" options="-parameters" />
       <module name="api-gateway" options="-parameters" />
+      <module name="auth-server" options="-parameters" />
       <module name="employee-service" options="-parameters" />
       <module name="eureka-discovery-server" options="-parameters" />
       <module name="eureka-server" options="-parameters" />

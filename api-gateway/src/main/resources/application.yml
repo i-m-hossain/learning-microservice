@@ -1,6 +1,17 @@
 server:
   port: 8080
+
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+
 spring:
+  redis:
+    host: localhost
+    port: 6379
   application:
     name: api-gateway
   main:
@@ -12,15 +23,20 @@ spring:
           enabled: true
           lower-case-service-id: true
 
-eureka:
-  client:
-    service-url:
-      default-zone: http://localhost:8761/eureka/
-    register-with-eureka: true
-    fetch-registry: true
-
 management:
   endpoints:
     web:
       exposure:
-        include=*:
+        include: '*'
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  endpoint:
+    prometheus:
+      enabled: true
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.web: DEBUG
