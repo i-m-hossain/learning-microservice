@@ -1,47 +1,22 @@
-package com.imran.order_service.entity;
+package com.imran.order_service.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.List;
 
 @Entity
-@Table(name = "orders")
+@Table(name = "t_orders")
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Data
 public class Order {
     @Id
-    private String id;
-    private String productId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String orderNumber;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<OrderLineItems> orderLineItemsList;
     private int quantity;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getProductId() {
-        return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                "id='" + id + '\'' +
-                ", productId='" + productId + '\'' +
-                ", quantity=" + quantity +
-                '}';
-    }
 }

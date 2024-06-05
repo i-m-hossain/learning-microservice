@@ -3,6 +3,8 @@ package com.imran.product_service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.imran.product_service.dto.ProductRequest;
+import com.imran.product_service.repository.ProductRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -28,6 +30,8 @@ class ProductServiceApplicationTests {
 	private MockMvc mockMvc;
 	@Autowired
 	private ObjectMapper objectMapper;
+	@Autowired
+	private ProductRepository productRepository;
 	@DynamicPropertySource
 	static void setProperties(DynamicPropertyRegistry dynamicPropertyRegistry){
 		dynamicPropertyRegistry.add("spring.data.mongodb.uri", mongoDBContainer::getReplicaSetUrl);
@@ -43,6 +47,7 @@ class ProductServiceApplicationTests {
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(productRequestString)
 		).andExpect(status().isCreated());
+		Assertions.assertEquals(1, productRepository.findAll().size());
 	}
 	private ProductRequest getProductRequest(){
 		return ProductRequest.builder().name("Orange").price(400).description("Orange is a good fruit").build();
