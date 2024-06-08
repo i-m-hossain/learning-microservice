@@ -1,0 +1,75 @@
+server:
+  port: 8080
+
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka/
+
+spring:
+  main:
+    web-application-type: reactive
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        # accessing product service through api gateway
+        - id: product-service
+          uri: lb://product-service
+          predicates:
+            - Path=/api/products/**
+        # accessing order service through api gateway
+        - id: order-service
+          uri: lb://order-service
+          predicates:
+            - Path=/api/orders/**
+        # accessing inventory through api gateway
+        - id: inventory-service
+          uri: lb://inventory-service
+          predicates:
+            - Path=/api/inventories/**
+        # accessing discovery server through api gateway
+        - id: discovery-server
+          uri: http://localhost:8761
+          predicates:
+            - Path=/eureka/web
+          filters:
+            - SetPath=/
+        # load static contents(css, js)
+        - id: discovery-server-static
+          uri: http://localhost:8761
+          predicates:
+            - Path=/eureka/**
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  endpoint:
+    prometheus:
+      enabled: true
+
+
+logging:
+  level:
+    root: INFO
+    org:
+      springframework:
+        web: DEBUG
+        cloud:
+          gateway: TRACE
+
+
+
+
+
