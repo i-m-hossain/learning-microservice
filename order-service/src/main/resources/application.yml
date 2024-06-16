@@ -1,11 +1,11 @@
 server:
-  port: 8082
+  port: 8051
 
 spring:
   application:
     name: order-service
   datasource:
-    url: jdbc:mysql://localhost:3300/order-service
+    url: jdbc:mysql://localhost:3300/orderService
     username: root
     password: password
     driver-class-name: com.mysql.cj.jdbc.Driver

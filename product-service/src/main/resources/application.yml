@@ -4,7 +4,7 @@ spring:
     name: product-service
   data:
     mongodb:
-      uri:  mongodb://root:example@localhost:27017/product-service?authSource=admin
+      uri:  mongodb://root:example@localhost:27017/productService?authSource=admin
   #  for load balancing
   cloud:
     loadbalancer:
@@ -12,7 +12,7 @@ spring:
         enabled: true
 
 server:
-  port: 8081
+  port: 8050
 
 eureka:
   client:

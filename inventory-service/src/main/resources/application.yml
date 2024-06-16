@@ -1,11 +1,11 @@
 server:
-  port: 8083
+  port: 8052
 
 spring:
   application:
     name: inventory-service
   datasource:
-    url: jdbc:mysql://localhost:3300/inventory-service
+    url: jdbc:mysql://localhost:3300/inventoryService
     username: root
     password: password
     driver-class-name: com.mysql.cj.jdbc.Driver
